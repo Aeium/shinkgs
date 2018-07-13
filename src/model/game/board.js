@@ -198,7 +198,7 @@ export function applyPropsToBoard(
             request.post(
                 'http://localhost:3001',
                 {
-                json: { key: prop } },
+                json: { key : prop } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body)
