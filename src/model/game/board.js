@@ -191,12 +191,14 @@ export function applyPropsToBoard(
         newBoard[loc.y][loc.x] = color === 'empty' ? null : color;
         if (prop.name === 'MOVE') {
           
-            // send push notification for new move
+            
             console.log('move played!!! y:' + loc.y.toString() + "  x:" + loc.x.toString())
           
+            // send push notification for new move
             request.post(
-                'http://localhost/movePush',
-                { json: { key: prop } },
+                'http://localhost:3001',
+                {
+                json: { key: prop } },
                 function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         console.log(body)
