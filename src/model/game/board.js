@@ -1,5 +1,8 @@
 // @flow
 import {InvariantError} from '../../util/error';
+
+var request = require('request');
+
 import type {
   SgfLoc,
   SgfProp,
@@ -187,6 +190,20 @@ export function applyPropsToBoard(
       if (loc !== 'PASS') {
         newBoard[loc.y][loc.x] = color === 'empty' ? null : color;
         if (prop.name === 'MOVE') {
+          
+            // send push notification for new move
+            console.log('move played!!! y:' + loc.y.toString() + "  x:" + loc.x.toString())
+          
+            request.post(
+                'http://localhost/movePush',
+                { json: { key: prop } },
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        console.log(body)
+                    }
+                }
+            );
+          
           let ret = removeDeadStonesAround(newBoard, loc.x, loc.y);
           // TODO - check for auto-capture for appropriate rulesets
           if (ret) {
