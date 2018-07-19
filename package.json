@@ -23,7 +23,7 @@
     "uuid": "3.0.1"
   },
   "scripts": {
-    "start": "yarn run build-sass && yarn run start-sass & HTTPS=true react-scripts start",
+    "start": "yarn run build-sass && yarn run start-sass & react-scripts start",
     "start-sass": "node-sass --include-path='node_modules' --watch src/css -o src",
     "build": "yarn run build-sass && react-scripts build",
     "build-sass": "node-sass --include-path='node_modules' src/css/index.scss src/index.css",
